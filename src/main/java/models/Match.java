@@ -2,31 +2,45 @@ package models;
 
 import exceptions.InvalidInput;
 
-import java.util.List;
-
 public class Match {
-    private int name;
-    private List<Team> teams;
-    private List<Ball> balls;
+    private final String name;
     private Team currentBattingTeam;
-    private Team currentBowlingTeam;
-    private int totalPlayersInTeam;
+    private final int totalPlayersInTeam;
+    private final int totalOvers;
 
-    public void addPlayersToTeam(Team team, List<String> players) throws InvalidInput {
-        if(players.size() > totalPlayersInTeam) {
-            throw new InvalidInput("Cannot pass more players than allowed");
-        }
-        players.forEach(player -> {
-            try {
-                team.addPlayer(new Player(player));
-            } catch (InvalidInput e) {
-                System.out.println(e.getMessage());
-            }
-        });
+    public Match(String name, Team currentBattingTeam, int totalPlayersInTeam, int totalOvers) {
+        this.currentBattingTeam = currentBattingTeam;
+        this.name = name;
+        this.totalPlayersInTeam = totalPlayersInTeam;
+        this.totalOvers = totalOvers;
     }
 
-    public void startMatch(Team battingTeam) {
+    public Team getCurrentBattingTeam() {
+        return currentBattingTeam;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getTotalPlayersInTeam() {
+        return totalPlayersInTeam;
+    }
+
+    public int getTotalOvers() {
+        return totalOvers;
+    }
+
+    public void setCurrentBattingTeam(Team currentBattingTeam) {
+        this.currentBattingTeam = currentBattingTeam;
+    }
+
+    public void addPlayersToTeam(Team team, String player) {
+        try {
+            team.addPlayer(new Batsman(player));
+        } catch (InvalidInput e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

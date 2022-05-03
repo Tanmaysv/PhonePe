@@ -9,10 +9,10 @@ import java.util.Queue;
 
 public class Team {
     private final String name;
-    private final List<Player> players;
-    private final Queue<Player> availablePlayers;
-    private Player strikerBatsman;
-    private Player nonStrickerBatsman;
+    private final List<Batsman> players;
+    private final Queue<Batsman> availablePlayers;
+    private Batsman strikerBatsman;
+    private Batsman nonStrickerBatsman;
     private int teamScore;
     private int totalWickets;
 
@@ -29,8 +29,12 @@ public class Team {
         return name;
     }
 
-    public List<Player> getPlayers() {
+    public List<Batsman> getPlayers() {
         return players;
+    }
+
+    public Queue<Batsman> getAvailablePlayers() {
+        return availablePlayers;
     }
 
     public int getTeamScore() {
@@ -41,11 +45,36 @@ public class Team {
         return totalWickets;
     }
 
-    public void addPlayer(Player player) throws InvalidInput {
+    public Batsman getStrikerBatsman() {
+        return strikerBatsman;
+    }
+
+    public Batsman getNonStrickerBatsman() {
+        return nonStrickerBatsman;
+    }
+
+    public void setStrikerBatsman(Batsman strikerBatsman) {
+        this.strikerBatsman = strikerBatsman;
+    }
+
+    public void setNonStrickerBatsman(Batsman nonStrickerBatsman) {
+        this.nonStrickerBatsman = nonStrickerBatsman;
+    }
+
+    public void setTeamScore(int teamScore) {
+        this.teamScore = teamScore;
+    }
+
+    public void setTotalWickets(int totalWickets) {
+        this.totalWickets = totalWickets;
+    }
+
+    public void addPlayer(Batsman player) throws InvalidInput {
         if(players.contains(player)) {
             throw new InvalidInput("This player is already added to the team");
         } else {
             players.add(player);
+            availablePlayers.add(player);
         }
     }
 
@@ -55,47 +84,4 @@ public class Team {
             this.nonStrickerBatsman = availablePlayers.poll();
         }
     }
-
-    public void updateTeamStats(int score) {
-        strikerBatsman.updatePlayerStats(score);
-        if(shouldBatsmanBeSwapped(score))
-            swapBatsmanPosition();
-        updateTeamScore(score);
-    }
-
-    public boolean shouldBatsmanBeSwapped(int score) {
-        return score % 2 != 0;
-    }
-
-    public void swapBatsmanPosition() {
-        Player temp = nonStrickerBatsman;
-        this.nonStrickerBatsman = strikerBatsman;
-        this.strikerBatsman = temp;
-    }
-
-    public void updateTeamScore(int score) {
-        this.teamScore += score;
-    }
-
-    public void updateTotalWickets() {
-        this.totalWickets++;
-        if(isNextBatsmanAvailable()) {
-            updateTeamStats(0);
-            onFallOfWicket();
-        } else {
-            System.out.println("Team is all out");
-        }
-
-    }
-
-    public boolean isNextBatsmanAvailable() {
-        return availablePlayers.size() > 0;
-    }
-
-    public Player onFallOfWicket() {
-        Player currentPlayer = availablePlayers.poll();
-        this.strikerBatsman = currentPlayer;
-        return currentPlayer;
-    }
-
 }

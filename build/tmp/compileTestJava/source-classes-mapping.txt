@@ -1,0 +1,2 @@
+service/ScoreboardServiceTest.java
+ service.ScoreboardServiceTest
