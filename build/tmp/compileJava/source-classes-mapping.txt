@@ -1,7 +1,7 @@
 exceptions/InvalidInput.java
  exceptions.InvalidInput
-CricketDashboard.java
- CricketDashboard
+constants/BallType.java
+ constants.BallType
 models/Batsman.java
  models.Batsman
 models/Team.java
@@ -14,9 +14,9 @@ models/Player.java
  models.Player
 service/DisplayService.java
  service.DisplayService
+CricketDashboard.java
+ CricketDashboard
 service/InningsService.java
  service.InningsService
-constants/BallType.java
- constants.BallType
 service/ScoreboardService.java
  service.ScoreboardService

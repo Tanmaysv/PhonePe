@@ -41,8 +41,10 @@ public class InningsService {
         Scanner sc = new Scanner(System.in);
         for (int i = 1; i <= totalOvers; i++) {
             System.out.println("Over number: " + i);
-            for (int j = 0; j < 6; j++) {
+            int validBall = 0;
+            while (validBall != 6) {
                 String score = sc.nextLine();
+                if(scoreboardService.isBallValid(score)) validBall++;
                 try {
                     scoreboardService.updateScore(score);
                 } catch (InvalidInput e) {
@@ -63,8 +65,10 @@ public class InningsService {
         Scanner sc = new Scanner(System.in);
         for (int i = 1; i <= totalOvers; i++) {
             System.out.println("Over number: " + i);
-            for (int j = 0; j < 6; j++) {
+            int validBall = 0;
+            while (validBall != 6) {
                 String score = sc.nextLine();
+                if(scoreboardService.isBallValid(score)) validBall++;
                 try {
                     scoreboardService.updateScore(score);
                 } catch (InvalidInput e) {

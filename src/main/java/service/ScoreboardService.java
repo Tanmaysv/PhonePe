@@ -54,13 +54,8 @@ public class ScoreboardService {
     public void updateTotalWickets() {
         Team currentBattingTeam = match.getCurrentBattingTeam();
         currentBattingTeam.setTotalWickets(currentBattingTeam.getTotalWickets() + 1);
-        if(isNextBatsmanAvailable()) {
-            updateTeamStats(0);
-            onFallOfWicketUpdateBatsman();
-        } else {
-            System.out.println("Team is all out");
-        }
-
+        updateTeamStats(0);
+        onFallOfWicketUpdateBatsman();
     }
 
     public boolean isNextBatsmanAvailable() {
@@ -72,6 +67,10 @@ public class ScoreboardService {
         Batsman currentPlayer = currentBattingTeam.getAvailablePlayers().poll();
         currentBattingTeam.setStrikerBatsman(currentPlayer);
         return currentPlayer;
+    }
+
+    public boolean isBallValid(String score) {
+        return !score.equals(BallType.WIDE.getValue()) && !score.equals(BallType.NO_BALL.getValue());
     }
 
 
