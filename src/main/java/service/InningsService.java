@@ -51,13 +51,15 @@ public class InningsService {
                     System.out.println(e.getMessage());
                 }
                 if (isTeamAllOut()) {
-                    displayService.displayScoreCard(match.getCurrentBattingTeam());
+                    String overs = i - 1 + "." + validBall;
+                    displayService.displayScoreCard(match.getCurrentBattingTeam(), overs);
                     return;
                 }
             }
 
             scoreboardService.swapBatsmanPosition();
-            displayService.displayScoreCard(match.getCurrentBattingTeam());
+            String overs = i + "";
+            displayService.displayScoreCard(match.getCurrentBattingTeam(), overs);
         }
     }
 
@@ -75,14 +77,16 @@ public class InningsService {
                     System.out.println(e.getMessage());
                 }
                 if (match.getCurrentBattingTeam().getTeamScore() > target) {
-                    displayService.displayScoreCard(match.getCurrentBattingTeam());
+                    String overs = i - 1 + "." + validBall;
+                    displayService.displayScoreCard(match.getCurrentBattingTeam(), overs);
                     int wicketsRemaining = match.getTotalPlayersInTeam() - match.getCurrentBattingTeam().getTotalWickets();
                     System.out.println("Result: Team 2 won the match by " + wicketsRemaining + " wickets");
                     return;
                 }
                 if(isTeamAllOut()) {
                     int runsDifference = target - match.getCurrentBattingTeam().getTeamScore();
-                    displayService.displayScoreCard(match.getCurrentBattingTeam());
+                    String overs = i - 1 + "." + validBall;
+                    displayService.displayScoreCard(match.getCurrentBattingTeam(), overs);
                     if(runsDifference == 0) {
                         System.out.println("Result: Match tied");
                     } else {
@@ -92,7 +96,8 @@ public class InningsService {
                 }
             }
             scoreboardService.swapBatsmanPosition();
-            displayService.displayScoreCard(match.getCurrentBattingTeam());
+            String overs = i + "";
+            displayService.displayScoreCard(match.getCurrentBattingTeam(), overs);
         }
         int runsDifference = target - match.getCurrentBattingTeam().getTeamScore();
         if(runsDifference == 0) {

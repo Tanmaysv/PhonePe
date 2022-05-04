@@ -12,10 +12,10 @@ service/MatchService.java
  service.MatchService
 models/Player.java
  models.Player
-service/DisplayService.java
- service.DisplayService
 service/ScoreboardService.java
  service.ScoreboardService
+service/DisplayService.java
+ service.DisplayService
 service/InningsService.java
  service.InningsService
 CricketDashboard.java
