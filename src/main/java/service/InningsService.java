@@ -82,6 +82,7 @@ public class InningsService {
                 }
                 if(isTeamAllOut()) {
                     int runsDifference = target - match.getCurrentBattingTeam().getTeamScore();
+                    displayService.displayScoreCard(match.getCurrentBattingTeam());
                     if(runsDifference == 0) {
                         System.out.println("Result: Match tied");
                     } else {
